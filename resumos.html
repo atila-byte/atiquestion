@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>AtiQuestion | Resumos Dinâmicos</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="questoes_1.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>AtiQuestion</h1>
+        <div class="nav-links" style="display: flex; align-items: center;">
+            <a href="index.html">Página Inicial</a>
+            <a href="banco.html">Banco de Questões</a>
+            <a href="simulado.html">Simulador</a>
+            <a href="resumos.html">Resumo Dinâmico</a>
+            
+            <label class="theme-toggle-btn" style="margin-left: 20px;">
+                <input type="checkbox" id="dark-mode-checkbox" onchange="toggleTheme()">
+                <span class="theme-toggle-content" id="texto-botao-tema">🌙 Modo Escuro</span>
+            </label>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2>📚 Resumos Dinâmicos</h2>
+            <p style="color: var(--secondary); margin-bottom: 20px;">Selecione uma especialidade e tema para revisar o conteúdo e fixar com questões.</p>
+            
+            <div id="conteudo-resumo">
+                <h3 style="color: var(--primary);">Cardiologia > Hipertensão Arterial</h3>
+                <br>
+                <p>Aqui entrará o seu texto de resumo sobre HAS, classificações, diretrizes, e fluxogramas de tratamento...</p>
+                <br><br>
+                
+                <hr style="border: 0; border-top: 1px solid #ddd; margin: 30px 0;">
+                
+                <h3 style="text-align: center; color: var(--secondary);">Fixação do Tema</h3>
+                <div id="questoes-tema" data-tema="HIPERTENSÃO ARTERIAL"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Assim que a página carrega, ele puxa as questões do tema específico
+        window.onload = function() {
+            const container = document.getElementById('questoes-tema');
+            if (container) {
+                const temaAlvo = container.getAttribute('data-tema');
+                carregarQuestoesPorTema(temaAlvo, 'questoes-tema');
+            }
+        };
+    </script>
+</body>
+</html>
