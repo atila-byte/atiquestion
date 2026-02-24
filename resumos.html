@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>AtiQuestion | Resumos Dinâmicos</title>
     <link rel="stylesheet" href="style.css">
-    <script src="questoes_1.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -14,7 +13,6 @@
             <a href="banco.html">Banco de Questões</a>
             <a href="simulado.html">Simulador</a>
             <a href="resumos.html">Resumo Dinâmico</a>
-            
             <label class="theme-toggle-btn" style="margin-left: 20px;">
                 <input type="checkbox" id="dark-mode-checkbox" onchange="toggleTheme()">
                 <span class="theme-toggle-content" id="texto-botao-tema">🌙 Modo Escuro</span>
@@ -23,34 +21,85 @@
     </nav>
 
     <div class="container">
-        <div class="card">
-            <h2>📚 Resumos Dinâmicos</h2>
-            <p style="color: var(--secondary); margin-bottom: 20px;">Selecione uma especialidade e tema para revisar o conteúdo e fixar com questões.</p>
+        <h2 style="color: var(--primary); text-align: center; font-size: 2rem; margin-bottom: 10px;">📚 Resumos Dinâmicos</h2>
+        <p style="color: var(--secondary); text-align: center; margin-bottom: 30px;">Clique na especialidade para expandir e acessar seus resumos e questões.</p>
+        
+        <div class="specialty-grid">
             
-            <div id="conteudo-resumo">
-                <h3 style="color: var(--primary);">Cardiologia > Hipertensão Arterial</h3>
-                <br>
-                <p>Aqui entrará o seu texto de resumo sobre HAS, classificações, diretrizes, e fluxogramas de tratamento...</p>
-                <br><br>
-                
-                <hr style="border: 0; border-top: 1px solid #ddd; margin: 30px 0;">
-                
-                <h3 style="text-align: center; color: var(--secondary);">Fixação do Tema</h3>
-                <div id="questoes-tema" data-tema="HIPERTENSÃO ARTERIAL"></div>
+            <div class="specialty-card">
+                <div class="specialty-header" onclick="toggleResumos(this)">
+                    <h3>❤️ Cardiologia</h3>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="specialty-content">
+                    <a href="resumo_cardiologia_has.html" class="summary-link">Hipertensão Arterial (DBHA 2025)</a>
+                    
+                    </div>
+            </div>
+
+            <div class="specialty-card">
+                <div class="specialty-header" onclick="toggleResumos(this)">
+                    <h3>🧸 Pediatria</h3>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="specialty-content">
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 10px 0;">Nenhum resumo cadastrado ainda.</p>
+                </div>
+            </div>
+
+            <div class="specialty-card">
+                <div class="specialty-header" onclick="toggleResumos(this)">
+                    <h3>🦴 Reumatologia</h3>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="specialty-content">
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 10px 0;">Nenhum resumo cadastrado ainda.</p>
+                </div>
+            </div>
+
+            <div class="specialty-card">
+                <div class="specialty-header" onclick="toggleResumos(this)">
+                    <h3>🩸 Endocrinologia</h3>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="specialty-content">
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 10px 0;">Nenhum resumo cadastrado ainda.</p>
+                </div>
+            </div>
+
+            <div class="specialty-card">
+                <div class="specialty-header" onclick="toggleResumos(this)">
+                    <h3>🤰 Ginecologia e Obstetrícia</h3>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="specialty-content">
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 10px 0;">Nenhum resumo cadastrado ainda.</p>
+                </div>
+            </div>
+
+            <div class="specialty-card">
+                <div class="specialty-header" onclick="toggleResumos(this)">
+                    <h3>🩺 Pneumologia</h3>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="specialty-content">
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 10px 0;">Nenhum resumo cadastrado ainda.</p>
+                </div>
+            </div>
+
+            <div class="specialty-card">
+                <div class="specialty-header" onclick="toggleResumos(this)">
+                    <h3>🧠 Neurologia</h3>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="specialty-content">
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 10px 0;">Nenhum resumo cadastrado ainda.</p>
+                    
+                    </div>
             </div>
         </div>
     </div>
 
     <script src="app.js"></script>
-    <script>
-        // Assim que a página carrega, ele puxa as questões do tema específico
-        window.onload = function() {
-            const container = document.getElementById('questoes-tema');
-            if (container) {
-                const temaAlvo = container.getAttribute('data-tema');
-                carregarQuestoesPorTema(temaAlvo, 'questoes-tema');
-            }
-        };
-    </script>
 </body>
 </html>

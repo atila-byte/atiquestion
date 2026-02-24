@@ -575,3 +575,179 @@ a {
     color: #f87171;
     border-color: #f87171;
 }
+/* =========================================
+   PÁGINA DE RESUMOS E MENU DE ESPECIALIDADES (ACCORDION)
+   ========================================= */
+.specialty-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.specialty-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden; /* Essencial para a animação da sanfona */
+    transition: all 0.3s ease;
+}
+
+/* O cabeçalho clicável */
+.specialty-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    background: var(--surface);
+    transition: background 0.2s;
+}
+
+.specialty-header:hover {
+    background: rgba(0,0,0,0.02);
+}
+
+[data-theme="dark"] .specialty-header:hover {
+    background: rgba(255,255,255,0.03);
+}
+
+.specialty-header h3 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Setinha indicadora */
+.chevron {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.specialty-card.open .chevron {
+    transform: rotate(180deg); /* Vira a setinha para cima */
+    color: var(--primary);
+}
+
+/* O conteúdo oculto (Links dos resumos) */
+.specialty-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0 20px;
+    background: rgba(0,0,0,0.01);
+}
+
+[data-theme="dark"] .specialty-content {
+    background: rgba(0,0,0,0.1);
+}
+
+.specialty-card.open .specialty-content {
+    max-height: 1000px; /* Abre a sanfona */
+    opacity: 1;
+    padding: 10px 20px 20px 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Links dentro da sanfona */
+.summary-link {
+    display: block;
+    padding: 12px 15px;
+    background: var(--surface);
+    color: var(--text-main);
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    border: 1px solid var(--border-color);
+}
+
+.summary-link:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: translateX(5px);
+}
+
+/* =========================================
+   ESTILOS INTERNOS DOS RESUMOS (Ex: HAS)
+   ========================================= */
+:root { --theme-has: #D32F2F; } 
+        
+.resumo-box {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    border-left: 5px solid var(--theme-has);
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.res-header { 
+    font-size: 1.2rem; 
+    font-weight: 800; 
+    margin-bottom: 20px; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    color: var(--theme-has); 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid rgba(211, 47, 47, 0.1);
+    padding-bottom: 10px;
+}
+
+.res-content { font-size: 0.95rem; color: var(--text-main); line-height: 1.6; }
+
+/* Tabelas Customizadas */
+.table-custom, .drug-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+.table-custom th, .drug-table th { background-color: rgba(211, 47, 47, 0.05); color: var(--theme-has); padding: 12px; text-align: left; border: 1px solid var(--border-color); }
+.table-custom td, .drug-table td { padding: 12px; border: 1px solid var(--border-color); vertical-align: top;}
+.table-custom tr:nth-child(even) { background-color: rgba(0,0,0,0.02); }
+
+/* Tabela de Risco Cardiovascular */
+.table-risk { width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: center; margin-top: 15px; border: 1px solid var(--border-color); }
+.table-risk th { background: #424242; color: white; padding: 10px; border: 1px solid #666; font-weight: bold; }
+.table-risk td { padding: 10px 5px; border: 1px solid var(--border-color); font-weight: bold; color: #2c3e50; }
+.risk-row-header { background-color: rgba(0,0,0,0.03); text-align: left; padding-left: 10px; min-width: 150px; color: var(--text-main); }
+
+.risk-low { background-color: #81C784; } 
+.risk-mod { background-color: #FFD54F; } 
+.risk-high { background-color: #EF5350; color: white !important; }
+.risk-very-high { background-color: #880E4F; color: white !important; }
+
+/* Elementos Visuais do Resumo */
+.frcv-list { background: rgba(255, 152, 0, 0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(255, 152, 0, 0.3); margin-bottom: 15px; }
+.frcv-item { margin-bottom: 5px; display: block; }
+.frcv-item::before { content: "• "; color: var(--theme-has); font-weight: bold; }
+
+.alert-prevent { background: rgba(33, 150, 243, 0.1); border: 1px solid rgba(33, 150, 243, 0.3); color: #0D47A1; padding: 15px; border-radius: 8px; margin-top: 15px; }
+.step-box { background: rgba(0,0,0,0.02); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid #555; }
+.step-num { display: inline-block; background: #333; color: white; padding: 3px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; }
+
+.drug-name { font-weight: 700; color: var(--theme-has); display: block; }
+.drug-class-info { background: rgba(255, 235, 59, 0.1); color: #B78D00; padding: 12px; font-size: 0.9rem; border-left: 4px solid #FBC02D; margin-bottom: 10px; }
+.tag-sus { background-color: #2E7D32; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold; margin-left: 5px; display: inline-block; }
+
+/* Adaptações para Dark Mode nos Resumos */
+[data-theme="dark"] .table-risk td { color: #f8fafc; border-color: #475569; }
+[data-theme="dark"] .risk-low { background-color: #2e7d32; } 
+[data-theme="dark"] .risk-mod { background-color: #f57f17; }
+[data-theme="dark"] .risk-high { background-color: #c62828; }
+[data-theme="dark"] .alert-prevent { color: #90caf9; }
+[data-theme="dark"] .drug-class-info { color: #fbc02d; }

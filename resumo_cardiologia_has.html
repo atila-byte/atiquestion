@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>AtiQuestion | Resumo: Hipertensão Arterial</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos Internos Específicos para Resumos */
+        :root { --theme-has: #D32F2F; } 
+        
+        .resumo-box {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            border-left: 5px solid var(--theme-has);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .res-header { 
+            font-size: 1.2rem; 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            color: var(--theme-has); 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid rgba(211, 47, 47, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .res-content { font-size: 0.95rem; color: var(--text-main); line-height: 1.6; }
+        
+        /* Tabelas Gerais */
+        .table-custom { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+        .table-custom th { background-color: rgba(211, 47, 47, 0.05); color: var(--theme-has); padding: 12px; text-align: left; border: 1px solid var(--border-color); }
+        .table-custom td { padding: 12px; border: 1px solid var(--border-color); vertical-align: top;}
+        .table-custom tr:nth-child(even) { background-color: rgba(0,0,0,0.02); }
+
+        /* Tabela de Risco (Matriz) */
+        .table-risk { width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: center; margin-top: 15px; border: 1px solid var(--border-color); }
+        .table-risk th { background: #424242; color: white; padding: 10px; border: 1px solid #666; font-weight: bold; }
+        .table-risk td { padding: 10px 5px; border: 1px solid var(--border-color); font-weight: bold; color: #2c3e50; }
+        
+        .risk-row-header { background-color: rgba(0,0,0,0.03); text-align: left; padding-left: 10px; min-width: 150px; color: var(--text-main); }
+
+        /* Cores de Risco */
+        .risk-low { background-color: #81C784; } 
+        .risk-mod { background-color: #FFD54F; } 
+        .risk-high { background-color: #EF5350; color: white !important; }
+        .risk-very-high { background-color: #880E4F; color: white !important; }
+
+        /* Lista de Fatores */
+        .frcv-list { background: rgba(255, 152, 0, 0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(255, 152, 0, 0.3); margin-bottom: 15px; }
+        .frcv-item { margin-bottom: 5px; display: block; }
+        .frcv-item::before { content: "• "; color: var(--theme-has); font-weight: bold; }
+
+        /* Boxes de Destaque */
+        .alert-prevent { background: rgba(33, 150, 243, 0.1); border: 1px solid rgba(33, 150, 243, 0.3); color: #0D47A1; padding: 15px; border-radius: 8px; margin-top: 15px; }
+        .step-box { background: rgba(0,0,0,0.02); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid #555; }
+        .step-num { display: inline-block; background: #333; color: white; padding: 3px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; }
+
+        /* Tabela Drogas */
+        .drug-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+        .drug-table th { background-color: rgba(211, 47, 47, 0.05); color: var(--theme-has); padding: 12px; text-align: left; border: 1px solid var(--border-color); }
+        .drug-table td { padding: 12px; border: 1px solid var(--border-color); vertical-align: top;}
+        .drug-name { font-weight: 700; color: var(--theme-has); display: block; }
+        .drug-class-info { background: rgba(255, 235, 59, 0.1); color: #B78D00; padding: 12px; font-size: 0.9rem; border-left: 4px solid #FBC02D; margin-bottom: 10px; }
+        
+        .tag-sus { background-color: #2E7D32; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold; margin-left: 5px; vertical-align: middle; display: inline-block; }
+
+        .ref-section { margin-top: 40px; font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 20px; text-align: center; margin-bottom: 40px; }
+
+        /* Adaptações para Dark Mode nos Resumos */
+        [data-theme="dark"] .table-risk td { color: #f8fafc; border-color: #475569; }
+        [data-theme="dark"] .risk-low { background-color: #2e7d32; } 
+        [data-theme="dark"] .risk-mod { background-color: #f57f17; }
+        [data-theme="dark"] .risk-high { background-color: #c62828; }
+        [data-theme="dark"] .alert-prevent { color: #90caf9; }
+        [data-theme="dark"] .drug-class-info { color: #fbc02d; }
+    </style>
+
+    <script src="questoes_1.js"></script>
+    <script src="questoes_2.js"></script>
+    <script src="questoes_3.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="resumos.html" style="text-decoration: none; color: var(--secondary); font-size: 1.5rem;" title="Voltar">⬅️</a>
+            <h1>AtiQuestion</h1>
+        </div>
+        <div class="nav-links" style="display: flex; align-items: center;">
+            <a href="index.html">Página Inicial</a>
+            <a href="banco.html">Banco de Questões</a>
+            <a href="simulado.html">Simulador</a>
+            <a href="resumos.html">Resumo Dinâmico</a>
+            <label class="theme-toggle-btn" style="margin-left: 20px;">
+                <input type="checkbox" id="dark-mode-checkbox" onchange="toggleTheme()">
+                <span class="theme-toggle-content" id="texto-botao-tema">🌙 Modo Escuro</span>
+            </label>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <div style="margin-bottom: 20px; text-align: center;">
+            <h2 style="color: #D32F2F;">Hipertensão Arterial (DBHA 2025)</h2>
+            <span style="background: var(--surface); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; border: 1px solid var(--border-color); color: var(--text-muted);">Especialidade: Cardiologia</span>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">🩺 Diagnóstico e Classificação</div>
+            <div class="res-content">
+                <p style="font-size:0.85rem; margin-bottom:10px;">Valores para medidas de consultório (adultos > 18 anos). Confirmar em &ge; 2 consultas.</p>
+                <div style="overflow-x:auto;">
+                    <table class="table-custom">
+                        <tr><th>Classificação</th><th>PAS (mmHg)</th><th>PAD (mmHg)</th></tr>
+                        <tr><td><strong>PA Ótima</strong></td><td>< 120</td><td>e < 80</td></tr>
+                        <tr><td><strong>Pré-Hipertensão</strong></td><td>120 – 139</td><td>e/ou 80 – 89</td></tr>
+                        <tr><td><strong>HAS Estágio 1</strong></td><td>140 – 159</td><td>e/ou 90 – 99</td></tr>
+                        <tr><td><strong>HAS Estágio 2</strong></td><td>160 – 179</td><td>e/ou 100 – 109</td></tr>
+                        <tr><td><strong>HAS Estágio 3</strong></td><td>&ge; 180</td><td>e/ou &ge; 110</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">⚖️ Estratificação de Risco CV</div>
+            <div class="res-content">
+                <h4 style="color:var(--theme-has); font-size:0.95rem; margin-bottom:10px;">Fatores de Risco Cardiovascular (FRCV):</h4>
+                <div class="frcv-list">
+                    <span class="frcv-item">Sexo masculino.</span>
+                    <span class="frcv-item">Idade: > 55 anos (H) e > 65 anos (M).</span>
+                    <span class="frcv-item">História Familiar Prematura (1º grau): < 55 anos (H) e < 65 anos (M).</span>
+                    <span class="frcv-item">Tabagismo.</span>
+                    <span class="frcv-item">Obesidade (IMC &ge; 30 kg/m²).</span>
+                    <span class="frcv-item">Dislipidemia: LDL-c &ge; 100; não-HDL &ge; 130; HDL-c &le; 40(H)/&le; 50(M); TG > 150 mg/dL.</span>
+                </div>
+
+                <div style="overflow-x:auto;">
+                    <table class="table-risk">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="risk-row-header" style="background:#424242; color:white; text-align:center;">Fatores de risco CV, presença de LOA ou DCV</th>
+                                <th colspan="4" style="background:#555; color: white;">Pressão Arterial (mmHg)</th>
+                            </tr>
+                            <tr><th width="18%">PAS 130-139<br>PAD 80-89</th><th width="18%">HA Estágio 1</th><th width="18%">HA Estágio 2</th><th width="18%">HA Estágio 3</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="risk-row-header">Sem fatores de risco CV</td><td class="risk-low">RISCO BAIXO</td><td class="risk-low">RISCO BAIXO</td><td class="risk-mod">RISCO MODERADO</td><td class="risk-high">RISCO ALTO</td></tr>
+                            <tr><td class="risk-row-header">1 ou 2 fatores de risco CV</td><td class="risk-low">RISCO BAIXO</td><td class="risk-mod">RISCO MODERADO</td><td class="risk-high">RISCO ALTO</td><td class="risk-high">RISCO ALTO</td></tr>
+                            <tr><td class="risk-row-header">&ge; 3 fatores de risco CV</td><td class="risk-mod">RISCO MODERADO</td><td class="risk-high">RISCO ALTO</td><td class="risk-high">RISCO ALTO</td><td class="risk-high">RISCO ALTO</td></tr>
+                            <tr><td class="risk-row-header">LOA, DRC Estágio 3 ou DM</td><td class="risk-high">RISCO ALTO</td><td class="risk-high">RISCO ALTO</td><td class="risk-high">RISCO ALTO</td><td class="risk-very-high">RISCO MUITO ALTO</td></tr>
+                            <tr><td class="risk-row-header">DCV estabelecida ou DRC Estágio &ge; 4</td><td class="risk-very-high">RISCO MUITO ALTO</td><td class="risk-very-high">RISCO MUITO ALTO</td><td class="risk-very-high">RISCO MUITO ALTO</td><td class="risk-very-high">RISCO MUITO ALTO</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="alert-prevent">
+                    <strong>📢 Escore PREVENT (AHA):</strong> Recomendado para refinar a estratificação em pacientes sem doença manifesta (Risco em 10 anos).<br>
+                    <strong>Baixo:</strong> < 5% | <strong>Limítrofe:</strong> 5 a 7,5% | <strong>Intermediário:</strong> 7,5 a 20% | <strong>Alto:</strong> &ge; 20%
+                </div>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">🚦 Indicação de Tratamento</div>
+            <div class="res-content">
+                <div style="overflow-x:auto;">
+                    <table class="table-custom">
+                        <tr><th width="40%">Classificação / Risco</th><th>Conduta Recomendada</th></tr>
+                        <tr><td><strong>PAS 130-139 e/ou<br>PAD 85-89</strong></td><td>Início imediato de <strong>MEV</strong>.<br>Considerar medicamento se <strong>Alto Risco CV</strong> ou prevenção secundária.</td></tr>
+                        <tr><td><strong>Estágio 1 (Risco Baixo)</strong></td><td><strong>MEV</strong> por 3 meses. Se não meta: Farmacoterapia.</td></tr>
+                        <tr><td><strong>Estágio 1 (Mod/Alto)</strong></td><td><strong>MEV + Farmacoterapia</strong> imediata.</td></tr>
+                        <tr><td><strong>Estágio 2 e 3</strong></td><td><strong>MEV + Combinação de fármacos</strong> imediata.</td></tr>
+                        <tr><td><strong>Idosos Frágeis</strong></td><td>Cautela. Iniciar se PAS &ge; 160 (ou &ge; 140). Monoterapia.</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">💊 Tratamento Farmacológico</div>
+            <div class="res-content">
+                
+                <h4 style="color:#00796B; margin-top:15px; margin-bottom:0;">1. Diuréticos (D)</h4>
+                <div class="drug-class-info"><strong>Obs. Classe:</strong> Doses maiores aumentam efeitos metabólicos sem ganho anti-hipertensivo adicional. Tiazídicos e similares (Hidroclorotiazida, Clortalidona, Indapamida) são <strong>contraindicados em gota ativa</strong>.</div>
+                <div style="overflow-x:auto;">
+                    <table class="drug-table">
+                        <tr><th>Fármaco</th><th>Dose (mg)</th><th>x/dia</th><th>Obs</th></tr>
+                        <tr><td><span class="drug-name">Hidroclorotiazida <span class="tag-sus">SUS</span></span></td><td>25 – 50</td><td>1</td><td></td></tr>
+                        <tr><td><span class="drug-name">Clortalidona</span></td><td>12,5 – 25</td><td>1</td><td>Maior potência/meia-vida.</td></tr>
+                        <tr><td><span class="drug-name">Indapamida</span></td><td>1,5 – 3,0</td><td>1</td><td>Metabolicamente neutra.</td></tr>
+                        <tr><td><span class="drug-name">Furosemida <span class="tag-sus">SUS</span></span></td><td>20 – 240</td><td>1 a 3</td><td>Uso em DRC (ClCr < 30) ou Edema. Curta ação.</td></tr>
+                        <tr><td><span class="drug-name">Espironolactona <span class="tag-sus">SUS</span></span></td><td>25 – 100</td><td>1 a 2</td><td>Poupador K+. 4ª droga na HAS resistente. Risco ginecomastia.</td></tr>
+                        <tr><td><span class="drug-name">Eplerenona</span></td><td>25 – 100</td><td>1</td><td>Mais seletivo (menos ginecomastia).</td></tr>
+                        <tr><td><span class="drug-name">Amilorida</span></td><td>2,5 – 5</td><td>1</td><td>Geralmente em associação.</td></tr>
+                    </table>
+                </div>
+
+                <h4 style="color:#00796B; margin-bottom:0;">2. Inibidores da ECA (IECA) (A)</h4>
+                <div class="drug-class-info"><strong>Obs. Classe:</strong> Indicados em DM, DRC, ICFER. Risco de tosse seca, hipercalemia e angioedema. <strong>Contraindicados na gestação</strong>.</div>
+                <div style="overflow-x:auto;">
+                    <table class="drug-table">
+                        <tr><th>Fármaco</th><th>Dose (mg)</th><th>x/dia</th><th>Obs</th></tr>
+                        <tr><td><span class="drug-name">Captopril <span class="tag-sus">SUS</span></span></td><td>25 – 150</td><td>2 a 3</td><td>Meia-vida curta. Uso em urgências.</td></tr>
+                        <tr><td><span class="drug-name">Enalapril <span class="tag-sus">SUS</span></span></td><td>5 – 40</td><td>1 a 2</td><td>Padrão ouro no SUS.</td></tr>
+                        <tr><td><span class="drug-name">Ramipril</span></td><td>2,5 – 20</td><td>1 a 2</td><td></td></tr>
+                        <tr><td><span class="drug-name">Lisinopril</span></td><td>10 – 40</td><td>1</td><td>Contraindicado na estenose bilateral de art. renal.</td></tr>
+                        <tr><td><span class="drug-name">Perindopril</span></td><td>4 – 16</td><td>1</td><td></td></tr>
+                        <tr><td><span class="drug-name">Benazepril</span></td><td>10 – 40</td><td>1 a 2</td><td></td></tr>
+                        <tr><td><span class="drug-name">Fosinopril</span></td><td>10 – 40</td><td>1 a 2</td><td>Excreção compensatória (útil em DRC).</td></tr>
+                    </table>
+                </div>
+
+                <h4 style="color:#00796B; margin-bottom:0;">3. Bloq. Receptor Angiotensina (BRA) (A)</h4>
+                <div class="drug-class-info"><strong>Obs. Classe:</strong> Alternativa aos IECAs (sem tosse). Mesmas indicações. <strong>Nunca associar IECA + BRA</strong>.</div>
+                <div style="overflow-x:auto;">
+                    <table class="drug-table">
+                        <tr><th>Fármaco</th><th>Dose (mg)</th><th>x/dia</th><th>Obs</th></tr>
+                        <tr><td><span class="drug-name">Losartana <span class="tag-sus">SUS</span></span></td><td>50 – 100</td><td>1 a 2</td><td>Efeito uricosúrico leve.</td></tr>
+                        <tr><td><span class="drug-name">Valsartana</span></td><td>80 – 320</td><td>1</td><td></td></tr>
+                        <tr><td><span class="drug-name">Candesartana</span></td><td>8 – 32</td><td>1</td><td></td></tr>
+                        <tr><td><span class="drug-name">Olmesartana</span></td><td>20 – 40</td><td>1</td><td></td></tr>
+                        <tr><td><span class="drug-name">Telmisartana</span></td><td>20 – 80</td><td>1</td><td>Maior meia-vida da classe.</td></tr>
+                        <tr><td><span class="drug-name">Irbesartana</span></td><td>150 – 300</td><td>1</td><td></td></tr>
+                    </table>
+                </div>
+
+                <h4 style="color:#00796B; margin-bottom:0;">4. Bloq. Canal de Cálcio (BCC) (C)</h4>
+                <div class="drug-class-info"><strong>Obs. Classe:</strong> Preferência em negros e idosos. Dihidropiridínicos (DHP) causam edema maleolar. Não-DHP são bradicardizantes e devem ser evitados em ICFER e BAV.</div>
+                <div style="overflow-x:auto;">
+                    <table class="drug-table">
+                        <tr><th>Fármaco</th><th>Dose (mg)</th><th>x/dia</th><th>Obs</th></tr>
+                        <tr><td><span class="drug-name">Anlodipino <span class="tag-sus">SUS</span></span></td><td>2,5 – 10</td><td>1</td><td>DHP. Longa ação.</td></tr>
+                        <tr><td><span class="drug-name">Levanlodipino</span></td><td>2,5 – 5</td><td>1</td><td>DHP. Isômero.</td></tr>
+                        <tr><td><span class="drug-name">Nifedipino</span></td><td>10 – 60</td><td>1 a 3</td><td>DHP. Não usar cápsula ação rápida.</td></tr>
+                        <tr><td><span class="drug-name">Felodipino</span></td><td>2,5 – 10</td><td>1</td><td>DHP.</td></tr>
+                        <tr><td><span class="drug-name">Nitrendipino</span></td><td>10 – 30</td><td>1</td><td>DHP.</td></tr>
+                        <tr><td><span class="drug-name">Manidipino</span></td><td>10 – 20</td><td>1</td><td>DHP. Menor risco de edema.</td></tr>
+                        <tr><td><span class="drug-name">Lercanidipino</span></td><td>10 – 20</td><td>1</td><td>DHP. Lipofílico, menor edema.</td></tr>
+                        <tr><td><span class="drug-name">Lacidipino</span></td><td>2 – 6</td><td>1</td><td>DHP.</td></tr>
+                        <tr><td><span class="drug-name">Verapamil</span></td><td>120 – 360</td><td>1 a 2</td><td>Não-DHP.</td></tr>
+                        <tr><td><span class="drug-name">Diltiazem</span></td><td>80 – 240</td><td>1 a 2</td><td>Não-DHP.</td></tr>
+                    </table>
+                </div>
+
+                <h4 style="color:#00796B; margin-bottom:0;">5. Beta-bloqueadores (B)</h4>
+                <div class="drug-class-info"><strong>Obs. Classe:</strong> Indicações precisas: IC, Coronariopatia, Arritmia. Não são 1ª linha em HAS pura. Risco de broncoespasmo (asma).</div>
+                <div style="overflow-x:auto;">
+                    <table class="drug-table">
+                        <tr><th>Fármaco</th><th>Dose (mg)</th><th>x/dia</th><th>Obs</th></tr>
+                        <tr><td><span class="drug-name">Atenolol <span class="tag-sus">SUS</span></span></td><td>50 – 100</td><td>1 a 2</td><td>Cardiosseletivo.</td></tr>
+                        <tr><td><span class="drug-name">Propranolol</span></td><td>80 – 320</td><td>2 a 3</td><td>Não seletivo. Mais efeitos adversos.</td></tr>
+                        <tr><td><span class="drug-name">Carvedilol <span class="tag-sus">SUS</span></span></td><td>6,25 – 50</td><td>1 a 2</td><td>Vasodilatador (Alfa+Beta). Bom para IC.</td></tr>
+                        <tr><td><span class="drug-name">Metoprolol (Succinato) <span class="tag-sus">SUS</span></span></td><td>50 – 200</td><td>1</td><td>Cardiosseletivo. Liberação controlada (ICFER).</td></tr>
+                        <tr><td><span class="drug-name">Bisoprolol</span></td><td>5 – 20</td><td>1</td><td>Cardiosseletivo.</td></tr>
+                        <tr><td><span class="drug-name">Nebivolol</span></td><td>5 – 10</td><td>1</td><td>Vasodilatador (NO). Menor disfunção erétil.</td></tr>
+                        <tr><td><span class="drug-name">Nadolol</span></td><td>40 – 160</td><td>1</td><td>Não seletivo.</td></tr>
+                        <tr><td><span class="drug-name">Pindolol</span></td><td>10 – 60</td><td>2</td><td>Com ativ. simpaticomimética intrínseca (ASI).</td></tr>
+                    </table>
+                </div>
+
+                <h4 style="color:#00796B; margin-bottom:0;">6. Agonistas Centrais e Vasodilatadores</h4>
+                <div class="drug-class-info"><strong>Obs. Classe:</strong> Agonistas centrais (Clonidina/Metildopa) podem causar sonolência e boca seca. Vasodilatadores diretos (Hidralazina/Minoxidil) causam retenção hídrica e taquicardia reflexa (associar diurético + BB).</div>
+                <div style="overflow-x:auto;">
+                    <table class="drug-table">
+                        <tr><th>Fármaco</th><th>Dose (mg)</th><th>x/dia</th><th>Obs</th></tr>
+                        <tr><td><span class="drug-name">Clonidina <span class="tag-sus">SUS</span></span></td><td>0,2 – 0,9</td><td>2 a 3</td><td>Risco de rebote na retirada abrupta.</td></tr>
+                        <tr><td><span class="drug-name">Metildopa <span class="tag-sus">SUS</span></span></td><td>500 – 2000</td><td>2 a 3</td><td>Escolha na gestação.</td></tr>
+                        <tr><td><span class="drug-name">Hidralazina <span class="tag-sus">SUS</span></span></td><td>50 – 200</td><td>2 a 3</td><td>Vasodilatador direto.</td></tr>
+                        <tr><td><span class="drug-name">Minoxidil</span></td><td>5 – 40</td><td>1</td><td>Potente. Risco de hirsutismo.</td></tr>
+                        <tr><td><span class="drug-name">Doxazosina</span></td><td>1 – 16</td><td>1</td><td>Alfa-bloqueador. Bom para HPB.</td></tr>
+                        <tr><td><span class="drug-name">Prazosina</span></td><td>1 – 20</td><td>2 a 3</td><td>Risco de hipotensão ortostática (iniciar à noite).</td></tr>
+                        <tr><td><span class="drug-name">Terazosina</span></td><td>1 – 20</td><td>1</td><td>Alfa-bloqueador.</td></tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">📈 Fluxograma Terapêutico</div>
+            <div class="res-content">
+                <div class="step-box">
+                    <span class="step-num">PASSO 1</span> <strong>Monoterapia</strong>
+                    <p style="margin:5px 0 0 0; font-size:0.9rem;">
+                        <strong>Indicação:</strong> Estágio 1 (Risco Baixo/Moderado) ou Idoso Frágil.<br>
+                        <em>Opções: IECA, BRA, BCC ou Diurético.</em>
+                    </p>
+                </div>
+                <div class="step-box">
+                    <span class="step-num">PASSO 2</span> <strong>Terapia Dupla</strong>
+                    <p style="margin:5px 0 0 0; font-size:0.9rem;">
+                        <strong>Quem já inicia aqui?</strong> Estágio 2, Estágio 3 ou Estágio 1 (Alto Risco CV).<br>
+                        <em>Esquema: (IECA ou BRA) + (BCC ou Diurético).</em>
+                    </p>
+                </div>
+                <div class="step-box">
+                    <span class="step-num">PASSO 3</span> <strong>Terapia Tripla ou Otimização</strong>
+                    <p style="margin:5px 0 0 0; font-size:0.9rem;">
+                        Se meta não atingida no Passo 2.<br>
+                        <strong>Ação:</strong> Otimizar doses ou associar 3º fármaco.<br>
+                        <em>Esquema: IECA/BRA + BCC + Diurético.</em>
+                    </p>
+                </div>
+                <div class="step-box">
+                    <span class="step-num">PASSO 4</span> <strong>HAS Resistente</strong>
+                    <p style="margin:5px 0 0 0; font-size:0.9rem;">
+                        Sem controle com 3 drogas em dose otimizada (incluindo diurético).<br>
+                        <strong>Adicionar:</strong> Espironolactona 25-50mg.
+                    </p>
+                </div>
+                <div class="step-box">
+                    <span class="step-num">PASSO 5</span> <strong>Refratariedade</strong>
+                    <p style="margin:5px 0 0 0; font-size:0.9rem;">
+                        Falha após adição de Espironolactona.<br>
+                        <strong>Adicionar:</strong> Beta-bloqueador, Clonidina, Doxazosina ou Hidralazina.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">🎯 Metas Terapêuticas (DBHA 2025)</div>
+            <div class="res-content">
+                <p style="font-size:0.9rem; margin-bottom:10px;">
+                    <strong>Meta Geral:</strong> Reduzir a PA para <strong>< 130/80 mmHg</strong> em todos os hipertensos.
+                </p>
+                <div style="overflow-x:auto;">
+                    <table class="table-custom">
+                        <tr>
+                            <th width="40%">Perfil do Paciente</th>
+                            <th>Meta Recomendada (PAS/PAD)</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Geral (Risco Baixo, Moderado e Alto)</strong><br><small>Inclui DM, DRC não dialítica, DAC</small></td>
+                            <td><strong>< 130/80 mmHg</strong><br><small>(Admite-se reduzir até 120/70 mmHg sem aumento de risco)</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Idoso Hígido (Robusto)</strong></td>
+                            <td><strong>< 130/80 mmHg</strong><br><small>(Para a grande maioria dos idosos)</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Idoso Frágil</strong><br><small>Muito idosos ou expectativa de vida comprometida</small></td>
+                            <td><strong>Reduzir até o menor valor tolerado</strong><br><small>(Individualizado)</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pós-AVC ou AIT Prévio</strong><br><small>Para prevenção secundária</small></td>
+                            <td><strong>< 130/80 mmHg</strong><br><small>(Redução comprovada de eventos CV maiores)</small></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="ref-section">
+            <strong>Referência:</strong><br>
+            Brandão AA, Rodrigues CIS, Bortolotto LA, et al. Diretriz Brasileira de Hipertensão Arterial - 2025. Arq Bras Cardiol. 2025.
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 30px 0;">
+        <h3 style="text-align: center; color: var(--primary); margin-bottom: 5px;">Fixação do Tema</h3>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Questões do seu banco relacionadas a este resumo.</p>
+        
+        <div id="questoes-tema" data-tema="HIPERTENSÃO ARTERIAL"></div>
+
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Quando a página abre, ele puxa todas as questões do tema HIPERTENSÃO ARTERIAL e coloca na tela!
+        window.onload = function() {
+            const container = document.getElementById('questoes-tema');
+            if (container) {
+                const temaAlvo = container.getAttribute('data-tema');
+                // Chama a função que já criamos no app.js
+                carregarQuestoesPorTema(temaAlvo, 'questoes-tema');
+            }
+        };
+    </script>
+</body>
+</html>

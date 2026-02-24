@@ -538,3 +538,18 @@ function limparMemoria() {
         window.location.reload();
     }
 }
+// ---- LÓGICA DA SANFONA DOS RESUMOS ----
+function toggleResumos(headerElement) {
+    const cardClicado = headerElement.closest('.specialty-card');
+    
+    // Opcional: Fecha todos os outros cards que estiverem abertos
+    const todosCards = document.querySelectorAll('.specialty-card');
+    todosCards.forEach(card => {
+        if (card !== cardClicado) {
+            card.classList.remove('open');
+        }
+    });
+
+    // Abre ou fecha o card que o usuário clicou
+    cardClicado.classList.toggle('open');
+}
