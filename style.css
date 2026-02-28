@@ -186,6 +186,7 @@ button:active {
     margin-bottom: 1.5rem; 
     color: var(--text-main);
     font-weight: 400;
+    text-align: justify;
 }
 
 .alternativas { list-style: none; }
@@ -200,6 +201,7 @@ button:active {
     transition: all 0.2s ease; 
     position: relative;
     border: 1px solid transparent;
+    text-align: justify;
 }
 
 .alternativa-item:not(.alt-correta):not(.alt-errada):hover {

@@ -13,6 +13,16 @@ function toggleRisco(buttonElement) {
     }
 }
 
+// Função para embaralhar um array (Fisher-Yates Shuffle)
+function embaralharArray(array) {
+    let arrayCopia = [...array]; // Cria uma cópia para não alterar o banco original
+    for (let i = arrayCopia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arrayCopia[i], arrayCopia[j]] = [arrayCopia[j], arrayCopia[i]]; // Troca os elementos
+    }
+    return arrayCopia;
+}
+
 // Variável global para rastrear se o tempo acabou
 let tempoEsgotado = false;
 
@@ -61,14 +71,21 @@ function gerarHTMLQuestao(q, modoSimulado = false) {
         <div class="enunciado">${q.enunciado}</div>
         <ul class="alternativas">`;
     
-    q.alternativas.forEach(alt => {
+    // --- MÁGICA DO EMBARALHAMENTO AQUI ---
+    // Embaralha as alternativas antes de as desenhar no ecrã
+    let alternativasEmbaralhadas = embaralharArray(q.alternativas);
+    const letras = ['A', 'B', 'C', 'D', 'E']; // Letras para manter a ordem visual bonita
+
+    alternativasEmbaralhadas.forEach((alt, index) => {
+        let letraAtual = letras[index]; // Força a ficar sempre A, B, C, D independentemente do id original
+        
         html += `
             <li class="alternativa-item" data-id="${alt.id}" data-correta="${alt.correta}">
                 <button class="btn-riscar" onclick="toggleRisco(this)" title="Riscar/Descartar" type="button">✂️</button>
                 <div style="flex-grow: 1;">
                     <label style="font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 10px;">
                         <input type="radio" name="resposta-${q.id}" value="${alt.id}" onclick="handleRadioClick(this)">
-                        <span class="alt-texto">${alt.id}) ${alt.texto}</span>
+                        <span class="alt-texto"><strong>${letraAtual})</strong> ${alt.texto}</span>
                     </label>
                     <div class="resolucao-alt" style="display:none; margin-top: 10px;">${alt.resolucao}</div>
                 </div>
@@ -81,7 +98,6 @@ function gerarHTMLQuestao(q, modoSimulado = false) {
         html += `<button type="button" onclick="mostrarResolucao('${q.id}')" style="margin-top: 15px;" id="btn-resp-${q.id}">Responder</button>`;
     }
 
-    // O botão de "Copiar" foi removido daqui!
     html += `
         <div class="resolucao-container" id="res-${q.id}">
             <h4>Resolução Geral:</h4>
