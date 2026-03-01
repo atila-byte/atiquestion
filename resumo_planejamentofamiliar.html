@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>AtiQuestion | Resumo: Planejamento Familiar</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos Internos Específicos para Resumos (Tema Ginecologia) */
+        :root { --theme-color: #8E24AA; } /* Roxo Ginecologia */
+        
+        .resumo-box {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            border-left: 5px solid var(--theme-color);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .res-header { 
+            font-size: 1.2rem; 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            color: var(--theme-color); 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid rgba(142, 36, 170, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .res-content { font-size: 0.95rem; color: var(--text-main); line-height: 1.6; }
+        
+        /* Tabelas Gerais */
+        .table-custom { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+        .table-custom th { background-color: rgba(142, 36, 170, 0.05); color: var(--theme-color); padding: 12px; text-align: left; border: 1px solid var(--border-color); }
+        .table-custom td { padding: 12px; border: 1px solid var(--border-color); vertical-align: top;}
+        .table-custom tr:nth-child(even) { background-color: rgba(0,0,0,0.02); }
+
+        /* Boxes de Destaque */
+        .alert-info { background: rgba(142, 36, 170, 0.05); border: 1px solid rgba(142, 36, 170, 0.3); color: #6A1B9A; padding: 15px; border-radius: 8px; margin-top: 15px; margin-bottom: 15px;}
+        .alert-red { background: rgba(211, 47, 47, 0.05); border: 1px solid rgba(211, 47, 47, 0.3); color: #B71C1C; padding: 15px; border-radius: 8px; margin-top: 15px; margin-bottom: 15px;}
+        .step-box { background: rgba(0,0,0,0.02); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--theme-color); }
+        .step-num { display: inline-block; background: var(--theme-color); color: white; padding: 3px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; }
+
+        .ref-section { margin-top: 40px; font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 20px; text-align: center; margin-bottom: 40px; }
+
+        /* Adaptações para Dark Mode nos Resumos */
+        [data-theme="dark"] .table-custom tr:nth-child(even) { background-color: rgba(255,255,255,0.02); }
+        [data-theme="dark"] .alert-info { color: #CE93D8; background: rgba(142, 36, 170, 0.1); }
+        [data-theme="dark"] .alert-red { color: #EF5350; background: rgba(211, 47, 47, 0.1); }
+        [data-theme="dark"] .step-box { background: rgba(255,255,255,0.05); }
+    </style>
+
+    <script src="questoes_1.js"></script>
+    <script src="questoes_2.js"></script>
+    <script src="questoes_3.js"></script>
+    <script src="questoes_4.js"></script>
+    <script src="questoes_5.js"></script>
+    <script src="questoes_6.js"></script>
+    <script src="questoes_7.js"></script>
+    <script src="questoes_8.js"></script>
+    <script src="questoes_9.js"></script>
+    <script src="questoes_10.js"></script>
+    <script src="questoes_11.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="resumos.html" style="text-decoration: none; color: var(--secondary); font-size: 1.5rem;" title="Voltar">⬅️</a>
+            <h1>AtiQuestion</h1>
+        </div>
+        <div class="nav-links" style="display: flex; align-items: center;">
+            <a href="banco.html">Banco</a>
+            <a href="simulado.html">Simulador</a>
+            <label class="theme-toggle-btn" style="margin-left: 20px;">
+                <input type="checkbox" id="dark-mode-checkbox" onchange="toggleTheme()">
+                <span class="theme-toggle-content" id="texto-botao-tema">🌙 Modo Escuro</span>
+            </label>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <div style="margin-bottom: 20px; text-align: center;">
+            <h2 style="color: var(--theme-color);">Planejamento Familiar e Contracepção</h2>
+            <span style="background: var(--surface); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; border: 1px solid var(--border-color); color: var(--text-muted);">Especialidade: Ginecologia e Obstetrícia</span>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">⚖️ Esterilização Voluntária (Nova Lei 14.443/2022)</div>
+            <div class="res-content">
+                <p>A nova legislação brasileira atualizou os critérios para a realização de Laqueadura Tubária (Feminina) e Vasectomia (Masculina), facilitando o acesso nos serviços de saúde:</p>
+                <div class="alert-info">
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li><strong>Idade Mínima Reduzida:</strong> Passou de 25 para <strong>21 anos</strong> de idade em indivíduos com capacidade civil plena.</li>
+                        <li><strong>Critério de Filhos:</strong> Pode ser feita em <strong>qualquer idade</strong> desde que a pessoa tenha, pelo menos, <strong>2 filhos vivos</strong>.</li>
+                        <li><strong>Fim do Aval do Cônjuge:</strong> <strong>Não é mais necessária</strong> a autorização ou consentimento do companheiro(a) para realizar o procedimento cirúrgico.</li>
+                        <li><strong>Prazo de Reflexão:</strong> Deve existir um período mínimo de <strong>60 dias</strong> entre a manifestação da vontade e a cirurgia.</li>
+                        <li><strong>Período do Parto:</strong> A laqueadura pode agora ser realizada durante o período de parto/aborto, garantidas as condições médicas e desde que o consentimento tenha sido assinado 60 dias antes.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">💊 Contracepção de Emergência (CE)</div>
+            <div class="res-content">
+                <p>A contracepção de emergência ("Pílula do dia seguinte") previne a gravidez após uma relação sexual desprotegida. <strong>Atenção para provas:</strong> O mecanismo de ação é inibir ou atrasar a ovulação. <strong>Não é abortiva</strong> e não causa malformações fetais caso a mulher já esteja grávida.</p>
+                
+                <h4 style="color: var(--theme-color); margin-top: 15px; margin-bottom: 5px;">Critérios e Indicações de Uso:</h4>
+                <ul style="padding-left: 20px;">
+                    <li>Relação sexual sem uso de qualquer método contraceptivo.</li>
+                    <li>Falha presumida ou uso incorreto do método (ex: ruptura ou deslizamento da camisinha, esquecimento de 2 ou mais pílulas combinadas, atraso na injeção).</li>
+                    <li>Casos de <strong>violência sexual</strong>.</li>
+                </ul>
+
+                <h4 style="color: var(--theme-color); margin-top: 15px; margin-bottom: 5px;">Métodos e Prazos (OMS / MS):</h4>
+                <div style="overflow-x:auto;">
+                    <table class="table-custom">
+                        <tr>
+                            <th width="25%">Método</th>
+                            <th>Esquema e Prazo Limite</th>
+                            <th>Características</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Pílula de Levonorgestrel</strong><br><small>(Ouro no SUS)</small></td>
+                            <td>Dose única de 1,5 mg ou duas doses de 0,75 mg a cada 12h.<br><strong>Eficácia máxima:</strong> Primeiras 72 horas.<br><strong>Prazo limite:</strong> Até 120 horas (5 dias).</td>
+                            <td>É o método oral de escolha. Apresenta menor incidência de efeitos colaterais (como náuseas e vômitos) em relação aos métodos combinados.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Método Yuzpe</strong></td>
+                            <td>Altas doses de pílula combinada (Estrogênio + Progestágeno) repetidas em 12 horas.</td>
+                            <td>Método alternativo caso o Levonorgestrel não esteja disponível. Causa muitos efeitos adversos (náuseas/vômitos).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DIU de Cobre</strong><br><small>(Não hormonal)</small></td>
+                            <td>Deve ser inserido em até <strong>120 horas (5 dias)</strong> após a relação desprotegida.</td>
+                            <td>É o método de emergência <strong>mais eficaz de todos</strong>. Vantagem: além de atuar na emergência, já garante contracepção contínua e reversível de longo prazo (LARC).</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="alert-red">
+                    <strong>⚠️ Importante:</strong> A eficácia dos métodos orais diminui progressivamente com o tempo. Não existe contraindicação absoluta para a pílula de levonorgestrel, devendo ser oferecida a todas as mulheres que necessitem, inclusive adolescentes.
+                </div>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">🛡️ Métodos Contraceptivos de Rotina (SUS)</div>
+            <div class="res-content">
+                <p style="margin-bottom:15px;">O Sistema Único de Saúde (SUS) garante o acesso gratuito a um leque variado de métodos, adaptados ao perfil de elegibilidade de cada paciente.</p>
+                
+                <div class="step-box">
+                    <span class="step-num">LARC (Long-Acting Reversible Contraceptives)</span>
+                    <p style="margin-top: 5px; margin-bottom: 5px;">São os métodos mais eficazes do mundo (superando a taxa de sucesso da própria laqueadura), pois não dependem da adesão diária da usuária.</p>
+                    <ul style="padding-left: 20px; margin-bottom: 0;">
+                        <li><strong>Implante Subdérmico (Etonogestrel):</strong> Progestágeno isolado. Duração até 3 anos. É o método reversível com <strong>menor taxa de falha</strong> (0,1%).</li>
+                        <li><strong>DIU de Cobre:</strong> Sem hormônios. O cobre atua de forma inflamatória e tóxica sobre o espermatozoide. Duração até 10 anos. <em>Efeito adverso:</em> pode aumentar o fluxo e as cólicas menstruais.</li>
+                        <li><strong>DIU Hormonal (Levonorgestrel):</strong> Apenas progestágeno local. Atrofia o endométrio e espessa o muco. Reduz significativamente os sangramentos e as cólicas.</li>
+                    </ul>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-num">Métodos Hormonais de Curta Duração</span>
+                    <ul style="padding-left: 20px; margin-top: 5px; margin-bottom: 0;">
+                        <li><strong>Anticoncepcional Oral Combinado (Pílula):</strong> Estrogênio + Progestágeno. Inibe a ovulação. Taxa de falha atinge os 7% no uso habitual. <em>Contraindicação clássica:</em> Risco cardiovascular, enxaqueca com aura, lúpus e histórico de trombose (TVP).</li>
+                        <li><strong>Injetável Mensal:</strong> Combinado. Inibe a ovulação. Não passa pelo trato gastrointestinal inicialmente, mas retém os mesmos riscos vasculares do estrogênio.</li>
+                        <li><strong>Minipílula (Progestágeno Isolado):</strong> Muito utilizada na lactação, pois não afeta a produção do leite materno.</li>
+                        <li><strong>Injetável Trimestral (Medroxiprogesterona):</strong> Progestágeno isolado. Inibe o pico de LH. <em>Alerta:</em> Uso prolongado associa-se a perda de densidade mineral óssea e o retorno da fertilidade pode demorar de 6 a 12 meses após a suspensão.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">📍 Protocolo Municipal: Implanon (SMS Salvador)</div>
+            <div class="res-content">
+                <p>Com o objetivo de organizar a utilização de recursos, a Secretaria Municipal de Saúde de Salvador (SMS) estabeleceu <strong>critérios de priorização</strong> para a inserção do Implante Subdérmico de Etonogestrel (Implanon) na Atenção Primária:</p>
+                
+                <div style="overflow-x:auto;">
+                    <table class="table-custom">
+                        <tr>
+                            <th width="20%">Nível</th>
+                            <th>Grupos Elegíveis</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Prioridade 1</strong><br><small>(Vulnerabilidade e Risco)</small></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 20px;">
+                                    <li>Pessoas em situação de rua.</li>
+                                    <li>Pessoas privadas de liberdade.</li>
+                                    <li>Adolescentes (10 a 19 anos).</li>
+                                    <li>Pessoas com deficiência física.</li>
+                                    <li>Pessoas com transtorno mental ou usuárias de substâncias psicoativas.</li>
+                                    <li>Pacientes com impossibilidade de amamentar, preferencialmente PVHA (Pessoas Vivendo com HIV/AIDS), após avaliação de interações medicamentosas.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prioridade 2</strong></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 20px;">
+                                    <li>Pessoas multíparas (&ge; 3 partos prévios).</li>
+                                    <li>Gestação prévia associada a comorbidades.</li>
+                                    <li>Profissionais do sexo.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prioridade 3</strong><br><small>(Restrições Clínicas)</small></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 20px;">
+                                    <li>Pacientes nas <strong>Categorias 3 e 4</strong> para outros métodos contraceptivos (Critérios de Elegibilidade da OMS).</li>
+                                    <li>Pacientes portadores de doenças que contraindicam a amamentação (exceto PVHA).</li>
+                                    <li>Homens trans, pessoas transmasculinas e pessoas não-binárias com sexo designado feminino ao nascimento.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prioridade 4</strong><br><small>(Demanda Espontânea)</small></td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 20px;">
+                                    <li>Pacientes que não se encaixam nas prioridades 1, 2 e 3, mas desejam utilizar o método.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">🚨 Prevenção Combinada e Outros Métodos</div>
+            <div class="res-content">
+                <div style="overflow-x:auto;">
+                    <table class="table-custom">
+                        <tr>
+                            <th width="25%">Método</th>
+                            <th>Ação e Características</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Dupla Proteção (Camisinha)</strong></td>
+                            <td>Os preservativos masculino (externo) e feminino (interno) são os <strong>únicos</strong> métodos que previnem as Infecções Sexualmente Transmissíveis (IST), incluindo o HIV. Seu uso deve ser estimulado junto com outro método de maior eficácia.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Amenorreia da Lactação (LAM)</strong></td>
+                            <td>Método comportamental válido <strong>apenas nos primeiros 6 meses pós-parto</strong>, e só se a mulher estiver em amamentação exclusiva (livre demanda) e permanecer em amenorreia (sem menstruar nenhuma vez).</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="ref-section">
+            <strong>Referência:</strong><br>
+            Ministério da Saúde - Contracepção na Saúde Sexual e Reprodutiva | Critérios Implanon: SMS Salvador (Nov/2025).
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 30px 0;">
+        <h3 style="text-align: center; color: var(--theme-color); margin-bottom: 5px;">Fixação do Tema</h3>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Questões do seu banco relacionadas a este resumo.</p>
+        
+        <div id="questoes-tema" data-tema="PLANEJAMENTO FAMILIAR"></div>
+
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Quando a página abre, puxa todas as questões do tema PLANEJAMENTO FAMILIAR e coloca na tela!
+        window.onload = function() {
+            const container = document.getElementById('questoes-tema');
+            if (container) {
+                const temaAlvo = container.getAttribute('data-tema');
+                carregarQuestoesPorTema(temaAlvo, 'questoes-tema');
+            }
+        };
+    </script>
+</body>
+</html>

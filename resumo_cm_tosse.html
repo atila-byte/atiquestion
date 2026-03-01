@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>AtiQuestion | Resumo: Abordagem da Tosse</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos Internos Específicos para Resumos */
+        :root { --theme-color: #0288D1; } /* Azul Pneumo */
+        
+        .resumo-box {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            border-left: 5px solid var(--theme-color);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .res-header { 
+            font-size: 1.2rem; 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            color: var(--theme-color); 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid rgba(2, 136, 209, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .res-content { font-size: 0.95rem; color: var(--text-main); line-height: 1.6; }
+        
+        /* Tabelas Gerais */
+        .table-custom { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+        .table-custom th { background-color: rgba(2, 136, 209, 0.05); color: var(--theme-color); padding: 12px; text-align: left; border: 1px solid var(--border-color); }
+        .table-custom td { padding: 12px; border: 1px solid var(--border-color); vertical-align: top;}
+        .table-custom tr:nth-child(even) { background-color: rgba(0,0,0,0.02); }
+
+        /* Boxes de Destaque */
+        .alert-red { background: rgba(211, 47, 47, 0.05); border: 1px solid rgba(211, 47, 47, 0.3); color: #B71C1C; padding: 15px; border-radius: 8px; margin-top: 15px; margin-bottom: 15px;}
+        .alert-info { background: rgba(2, 136, 209, 0.05); border: 1px solid rgba(2, 136, 209, 0.3); color: #01579B; padding: 15px; border-radius: 8px; margin-top: 15px; margin-bottom: 15px;}
+        .step-box { background: rgba(0,0,0,0.02); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--theme-color); }
+        .step-num { display: inline-block; background: var(--theme-color); color: white; padding: 3px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; }
+
+        .ref-section { margin-top: 40px; font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 20px; text-align: center; margin-bottom: 40px; }
+
+        /* Adaptações para Dark Mode nos Resumos */
+        [data-theme="dark"] .table-custom tr:nth-child(even) { background-color: rgba(255,255,255,0.02); }
+        [data-theme="dark"] .alert-red { color: #EF5350; background: rgba(211, 47, 47, 0.1); }
+        [data-theme="dark"] .alert-info { color: #81D4FA; background: rgba(2, 136, 209, 0.1); }
+        [data-theme="dark"] .step-box { background: rgba(255,255,255,0.05); }
+    </style>
+
+    <script src="questoes_1.js"></script>
+    <script src="questoes_2.js"></script>
+    <script src="questoes_3.js"></script>
+    <script src="questoes_4.js"></script>
+    <script src="questoes_5.js"></script>
+    <script src="questoes_6.js"></script>
+    <script src="questoes_7.js"></script>
+    <script src="questoes_8.js"></script>
+    <script src="questoes_9.js"></script>
+    <script src="questoes_10.js"></script>
+    <script src="questoes_11.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="resumos.html" style="text-decoration: none; color: var(--secondary); font-size: 1.5rem;" title="Voltar">⬅️</a>
+            <h1>AtiQuestion</h1>
+        </div>
+        <div class="nav-links" style="display: flex; align-items: center;">
+            <a href="banco.html">Banco</a>
+            <a href="simulado.html">Simulador</a>
+            <label class="theme-toggle-btn" style="margin-left: 20px;">
+                <input type="checkbox" id="dark-mode-checkbox" onchange="toggleTheme()">
+                <span class="theme-toggle-content" id="texto-botao-tema">🌙 Modo Escuro</span>
+            </label>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <div style="margin-bottom: 20px; text-align: center;">
+            <h2 style="color: var(--theme-color);">Abordagem Clínica da Tosse</h2>
+            <span style="background: var(--surface); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; border: 1px solid var(--border-color); color: var(--text-muted);">Especialidade: Pneumologia / Clínica Médica</span>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">⏱️ Definição e Classificação Temporal</div>
+            <div class="res-content">
+                <p>A tosse é um dos sintomas mais prevalentes na APS (11 a 13% da população). A primeira etapa obrigatória da investigação é definir o tempo de evolução, o que dita o direcionamento diagnóstico:</p>
+                <div style="overflow-x:auto;">
+                    <table class="table-custom">
+                        <tr>
+                            <th width="25%">Classificação</th>
+                            <th>Duração</th>
+                            <th>Perfil Clínico Geral</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Tosse Aguda</strong></td>
+                            <td><strong>Até 3 semanas</strong></td>
+                            <td>Geralmente de etiologia infecciosa viral (resfriados) ou bacteriana (PAC, rinossinusite). Pode ser a primeira manifestação de emergências (TEP, Edema Pulmonar).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tosse Subaguda</strong></td>
+                            <td><strong>3 a 8 semanas</strong></td>
+                            <td>Na imensa maioria das vezes, trata-se de hiper-responsividade brônquica transitória pós-infecciosa.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tosse Crônica</strong></td>
+                            <td><strong>> 8 semanas</strong></td>
+                            <td>Investigação protocolar sistemática. Causas variam desde tabagismo, uso de medicamentos, até a clássica tríade (STVAS, Asma, DRGE).</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">🔍 Anamnese e Exame Físico (A Chave do Diagnóstico)</div>
+            <div class="res-content">
+                <p>A anamnese e o exame físico constituem a primeira etapa diagnóstica, <strong>levando a uma hipótese causal em até 70% dos casos</strong>. Itens obrigatórios a serem abordados:</p>
+                <ul style="padding-left: 20px;">
+                    <li><strong>Início:</strong> Abrupto (pensar em aspiração de corpo estranho ou TEP) vs. Gradual.</li>
+                    <li><strong>Hábito Tabágico:</strong> É o fator de risco mais importante para a tosse crônica (Bronquite Crônica/DPOC ou Câncer de Pulmão). A tosse pode ser seca (apenas irritativa) ou com expectoração mucosa/purulenta.</li>
+                    <li><strong>Produção de Catarro:</strong> Tosse produtiva com volume abundante (mais de uma xícara por dia) e que piora com mudança postural levanta forte suspeita de <strong>Bronquiectasias</strong>.</li>
+                    <li><strong>Histórico Medicamentoso:</strong> Uso de inibidores da ECA (Enalapril, Captopril) é causa comum de tosse seca refratária. O uso prolongado de AINEs pode exacerbar a asma.</li>
+                    <li><strong>História Ocupacional/Ambiental:</strong> Exposição a poeiras, gases, mofo ou criação de animais (Asma ocupacional ou Pneumonite de Hipersensibilidade).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">🦠 Abordagem da Tosse Aguda (< 3 Semanas)</div>
+            <div class="res-content">
+                <p>As causas mais frequentes são as <strong>Rinossinusites agudas</strong> (como o resfriado comum, sendo autolimitada), <strong>Traqueobronquites agudas</strong> (normalmente virais) e crises de <strong>Asma brônquica</strong>.</p>
+                
+                <div class="alert-info">
+                    <strong>Atenção à Coqueluche:</strong> Vem apresentando incremento no diagnóstico em adultos e adolescentes. Apresenta padrão sazonal (fim da primavera/início do verão) e deve ser aventada na tosse aguda/subaguda em crises (acessos de tosse).
+                </div>
+
+                <h4 style="color:var(--theme-color); margin-top: 15px;">Sinais de Alarme na Tosse Aguda (Red Flags):</h4>
+                <p>Embora normalmente benigna, a tosse aguda pode ser sinal de doenças subjacentes graves. A presença destes sinais exige <strong>Radiografia de Tórax imediata</strong> e possível internamento:</p>
+                <div class="alert-red">
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li><strong>Pneumonia Adquirida na Comunidade (PAC):</strong> Febre, taquicardia, taquipneia e estertores creptantes à ausculta.</li>
+                        <li><strong>Embolia Pulmonar Aguda (TEP) ou Edema Pulmonar:</strong> Início súbito com dispneia desproporcional.</li>
+                        <li><strong>Câncer de Pulmão ou Tuberculose:</strong> Hemoptise, perda de peso, sudorese noturna ou adenopatias cervicais/supraclaviculares.</li>
+                        <li><strong>Aspiração de Corpo Estranho:</strong> Engasgo prévio, estridor ou assimetria na ausculta pulmonar.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">🛡️ Abordagem da Tosse Subaguda (3 a 8 Semanas)</div>
+            <div class="res-content">
+                <p>A causa mais comum é a <strong>Tosse Pós-Infecciosa</strong>. Ocorre em pacientes que tiveram uma infecção respiratória recente (viral ou por <em>Mycoplasma</em>/<em>Chlamydia</em>), restando uma hiper-responsividade brônquica e inflamação epitelial prolongadas.</p>
+                <p><strong>Conduta:</strong> É uma condição autolimitada. Não necessita de tratamento específico com antibióticos. Caso o paciente seja tabagista ou os sintomas persistam além de 8 semanas, a investigação segue o fluxo da tosse crônica.</p>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">🕰️ Abordagem da Tosse Crônica (> 8 Semanas)</div>
+            <div class="res-content">
+                <p>A tosse crônica é frequentemente atribuída a múltiplas etiologias e gera alta morbidade (vômitos, incontinência urinária, prejuízo do sono). Excluído o tabagismo, o uso de IECA e com uma Radiografia de Tórax normal, a investigação foca na <strong>Tríade Clássica</strong> (responsável por até 90% dos casos):</p>
+                
+                <div style="overflow-x:auto;">
+                    <table class="table-custom">
+                        <tr>
+                            <th width="25%">Etiologia</th>
+                            <th>Características Clínicas</th>
+                        </tr>
+                        <tr>
+                            <td><strong>1. STVAS</strong><br><small>(Síndrome da Tosse das Vias Aéreas Superiores)</small></td>
+                            <td>Causa mais comum (34% dos casos). Pode derivar de rinite alérgica ou sinusite crônica. Sintomas: Sensação de secreção a escorrer na garganta (gotejamento pós-nasal), necessidade frequente de pigarrear, obstrução nasal. Agrava-se ao deitar e pela manhã.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Asma<br></strong><small>(Tosse Variante da Asma - TVA)</small></td>
+                            <td>A tosse é o <strong>único sintoma</strong> (o paciente não apresenta a dispneia ou sibilos clássicos). Piora à noite e exacerba-se com exercícios ou frio. O exame clínico e a espirometria basal podem ser perfeitamente normais.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. DRGE</strong><br><small>(Doença do Refluxo Gastroesofágico)</small></td>
+                            <td>Responsável por 20% a 40% dos casos. Tosse ligada ao decúbito, pós-prandial ou fonatória. <strong>Pode ser silenciosa</strong> (ausência de pirose ou azia). O refluxo microaspirado ou o reflexo esofagobrônquico estimulam a tosse.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Bronquite Eosinofílica</strong></td>
+                            <td>Inflamação eosinofílica das vias aéreas <strong>sem hiper-responsividade brônquica</strong> (espirometria e broncoprovocação normais). Resistente a broncodilatadores, mas responde maravilhosamente a corticoides inalatórios.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p style="margin-top: 15px;"><strong>Outras suspeitas mandatórias:</strong></p>
+                <ul style="padding-left: 20px;">
+                    <li><strong>Tuberculose (TB):</strong> O Brasil é endêmico. Todo paciente com tosse produtiva crônica deve ter pesquisa de BAAR solicitada.</li>
+                    <li><strong>SAOS (Apneia do Sono):</strong> Mulheres na pós-menopausa ou homens obesos que roncam. O tratamento da SAOS frequentemente cessa a tosse.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">🧪 Roteiro de Exames Complementares</div>
+            <div class="res-content">
+                <div class="step-box">
+                    <span class="step-num">Atenção Primária (1ª Linha)</span>
+                    <ul style="margin-top:10px; padding-left:20px;">
+                        <li><strong>Radiografia de Tórax:</strong> Exame pivô! Deve ser realizada em TODOS os pacientes com tosse crônica e nos casos agudos com sinais atípicos. Um RX normal direciona para Asma, STVAS ou DRGE.</li>
+                        <li><strong>Pesquisa de BAAR no Escarro:</strong> Obrigatório na tosse crônica produtiva para exclusão de TB.</li>
+                        <li><strong>Espirometria:</strong> Avaliar obstrução ao fluxo aéreo (Asma ou DPOC).</li>
+                        <li><strong>Pico de Fluxo Expiratório (PFE):</strong> Variações > 15% ao longo do dia são sugestivas de Asma. Útil na asma ocupacional.</li>
+                    </ul>
+                </div>
+                <div class="step-box">
+                    <span class="step-num">Atenção Secundária (Encaminhar)</span>
+                    <ul style="margin-top:10px; padding-left:20px;">
+                        <li><strong>Teste de Broncoprovocação (Metacolina):</strong> Se suspeita de Tosse Variante da Asma com espirometria normal.</li>
+                        <li><strong>Broncoscopia:</strong> Obrigatório se hemoptise, suspeita de corpo estranho ou lesão neoplásica central.</li>
+                        <li><strong>TC de Seios Paranasais / Rinoscopia:</strong> Casos refratários de rinossinusite ou programação cirúrgica.</li>
+                        <li><strong>TC de Tórax (TCAR):</strong> Quando o RX é normal mas os sintomas persistem ou suspeita-se de doença intersticial/bronquiectasias precoces.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="resumo-box">
+            <div class="res-header">💊 Tratamento Empírico Sequencial (Para Tosse Crônica)</div>
+            <div class="res-content">
+                <p style="margin-bottom:15px;">Para pacientes com tosse crônica, <strong>Radiografia de Tórax normal</strong> e sem uso de IECA, adota-se um tratamento empírico sequencial. O padrão-ouro para confirmar o diagnóstico destas três entidades é a boa resposta terapêutica clínica:</p>
+                <div class="step-box">
+                    <span class="step-num">Passo 1</span> <strong>Foco na STVAS:</strong> Iniciar tratamento com Anti-histamínicos (frequentemente de 1ª geração) e antitussígenos/descongestionantes por <strong>2 semanas</strong>.
+                </div>
+                <div class="step-box">
+                    <span class="step-num">Passo 2</span> <strong>Foco na Asma (TVA):</strong> Se não houver melhora, suspender o passo 1 e introduzir Broncodilatadores associados a Corticoides Inalatórios por mais <strong>2 semanas</strong>.
+                </div>
+                <div class="step-box">
+                    <span class="step-num">Passo 3</span> <strong>Foco na DRGE:</strong> Caso haja falha nas terapias respiratórias, iniciar tratamento com Inibidores da Bomba de Prótons (IBP - ex: Omeprazol) em dose plena, associado rigorosamente a medidas comportamentais/posturais.
+                </div>
+                
+                <div class="alert-red">
+                    <strong>Quando referenciar ao Especialista?</strong><br>
+                    Casos de hemoptise; escarro mucopurulento refratário; fatores de risco para imunossupressão; falha no tratamento sequencial (Tosse Refratária) ou ausência de confirmação diagnóstica clínica após as tentativas empíricas.
+                </div>
+            </div>
+        </div>
+
+        <div class="ref-section">
+            <strong>Referência:</strong><br>
+            Tosse Aguda e Crônica (Barboza, T.A.) | Os Sintomas Respiratórios (Avaliação Clínica e Ambulatorial).
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 30px 0;">
+        <h3 style="text-align: center; color: var(--theme-color); margin-bottom: 5px;">Fixação do Tema</h3>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Questões do seu banco relacionadas a este resumo.</p>
+        
+        <div id="questoes-tema" data-tema="TOSSE"></div>
+
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Quando a página abre, ele puxa todas as questões do tema TOSSE e coloca na tela!
+        window.onload = function() {
+            const container = document.getElementById('questoes-tema');
+            if (container) {
+                const temaAlvo = container.getAttribute('data-tema');
+                // Chama a função global que está no app.js
+                carregarQuestoesPorTema(temaAlvo, 'questoes-tema');
+            }
+        };
+    </script>
+</body>
+</html>

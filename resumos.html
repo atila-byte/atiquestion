@@ -25,7 +25,18 @@
         <p style="color: var(--secondary); text-align: center; margin-bottom: 30px;">Clique na especialidade para expandir e acessar seus resumos e questões.</p>
         
         <div class="specialty-grid">
-            
+
+            <div class="specialty-card">
+                <div class="specialty-header" onclick="toggleResumos(this)">
+                    <h3>👑 Clínica Médica</h3>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="specialty-content">
+                    <a href="resumo_cm_tosse.html" class="summary-link">Abordagem da Tosse</a>
+                    
+                    </div>
+            </div>
+
             <div class="specialty-card">
                 <div class="specialty-header" onclick="toggleResumos(this)">
                     <h3>❤️ Cardiologia</h3>
@@ -73,7 +84,10 @@
                     <span class="chevron">▼</span>
                 </div>
                 <div class="specialty-content">
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 10px 0;">Nenhum resumo cadastrado ainda.</p>
+                  <div class="specialty-content">
+                    <a href="resumo_planejamentofamiliar.html" class="summary-link">Planejamento Familiar</a>
+                    
+                    </div>
                 </div>
             </div>
 
