@@ -12,7 +12,6 @@
             <a href="index.html">Página Inicial</a>
             <a href="banco.html">Banco de Questões</a>
             <a href="simulado.html">Simulador</a>
-            <a href="resumos.html">Resumo Dinâmico</a>
             
             <label class="theme-toggle-btn" style="margin-left: 20px;">
                 <input type="checkbox" id="dark-mode-checkbox" onchange="toggleTheme()">
@@ -20,22 +19,25 @@
             </label>
         </div>
     </nav>
+
     <div class="container" style="text-align: center; margin-top: 10vh;">
         <h2 style="color: var(--primary); font-size: 2.5rem;">Bem-vindo ao AtiQuestion</h2>
-        <p style="color: var(--secondary); font-size: 1.2rem; margin-bottom: 2rem;">Sua plataforma inteligente de estudos e revisões.</p>
+        <p style="color: var(--secondary); font-size: 1.2rem; margin-bottom: 0.5rem;">Sua plataforma inteligente de estudos e revisões.</p>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; font-style: italic;">Site criado por Átila Paixão. Versão estável 2.0</p>
+        
         <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
             <a href="simulado.html"><button style="width: auto;">Criar Simulado</button></a>
             <a href="banco.html"><button style="width: auto; background: var(--secondary);">Explorar Questões</button></a>
-            <a href="resumos.html"><button style="width: auto; background: #95a5a6;">Resumo Dinâmico</button></a>
         </div>
     </div>
+
     <div class="container" style="text-align: center; margin-top: 3rem;">
         <h3 style="color: var(--secondary); margin-bottom: 20px;">Raio-X de Desempenho</h3>
-        <div id="painel-estatisticas"></div>
-        
-        <button onclick="limparMemoria()" class="btn-danger">🗑️ Limpar Meus Dados</button>
+        <div id="stats-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+            </div>
+        <button onclick="limparMemoria()" style="background: var(--wrong); margin-top: 20px;">Apagar Todos os Dados</button>
     </div>
+    
     <script src="app.js"></script>
-    <script> window.onload = renderizarEstatisticas; </script>
 </body>
 </html>

@@ -13,7 +13,6 @@
             <a href="index.html">Página Inicial</a>
             <a href="banco.html">Banco de Questões</a>
             <a href="simulado.html">Simulador</a>
-            <a href="resumos.html">Resumo Dinâmico</a>
             
             <label class="theme-toggle-btn" style="margin-left: 20px;">
                 <input type="checkbox" id="dark-mode-checkbox" onchange="toggleTheme()">
@@ -44,12 +43,6 @@
                         <option value="">Todas</option>
                     </select>
                 </div>
-                <div class="form-group" id="container-ano" style="flex: 1; min-width: 100px; display: none;">
-                    <label>Ano</label>
-                    <select id="filtro-ano" onchange="adicionarTag('ano', this.value)">
-                        <option value="">Todos</option>
-                    </select>
-                </div>
             </div>
             
             <div id="tags-filtros" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;"></div>
@@ -63,12 +56,12 @@
         </div>
 
         <div id="resultados-banco"></div>
+
+        <footer style="text-align: center; margin-top: 40px; padding: 20px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-color);">
+            Site criado por Átila Paixão. Versão estável 2.0
+        </footer>
     </div>
 
     <script src="app.js"></script>
-    <script>
-        // Quando a página carregar, preenche os filtros automaticamente
-        window.onload = popularFiltros;
-    </script>
 </body>
 </html>

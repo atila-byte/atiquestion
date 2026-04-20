@@ -50,10 +50,6 @@ function handleRadioClick(radio) {
 let favoritos = JSON.parse(localStorage.getItem('ati_favoritos')) || [];
 let estatisticas = JSON.parse(localStorage.getItem('ati_estatisticas')) || {};
 
-// Ao iniciar o app, checa se o Dark Mode estava ativo
-if (localStorage.getItem('ati_theme') === 'dark') {
-    document.body.setAttribute('data-theme', 'dark');
-}
 // Utilitário: Renderizar HTML de uma questão (Adicionada a Badge de Nota)
 function gerarHTMLQuestao(q, modoSimulado = false) {
     let isFav = favoritos.includes(q.id);
@@ -152,7 +148,6 @@ function mostrarResolucao(questaoId) {
 let timerInterval;
 let simuladoAtivo = false;
 
-// Função modificada para resetar as variáveis
 function iniciarSimulado() {
     const numQ = document.getElementById('num-questoes').value;
     const tempo = document.getElementById('tempo').value;
@@ -160,7 +155,7 @@ function iniciarSimulado() {
     
     if (!numQ) { alert('Selecione o número de questões!'); return; }
 
-    tempoEsgotado = false; // Reseta o rastreador de tempo
+    tempoEsgotado = false; 
     let questoesEmbaralhadas = [...window.bancoDeQuestoes].sort(() => 0.5 - Math.random());
     let selecionadas = questoesEmbaralhadas.slice(0, numQ);
 
@@ -170,7 +165,6 @@ function iniciarSimulado() {
         container.innerHTML += gerarHTMLQuestao(q, true);
     });
 
-    // Adicionado ID ao botão para podermos removê-lo no final
     container.innerHTML += `<button id="btn-finalizar-simulado" onclick="finalizarSimulado()" style="margin-top:20px; background:var(--secondary);">Finalizar Simulado</button>`;
 
     if (tempo > 0) {
@@ -197,7 +191,7 @@ function iniciarTimer(segundosTotais, autoEncerra) {
             timerDiv.innerText = "Tempo Esgotado!";
             timerDiv.style.color = "var(--wrong)";
             timerDiv.style.borderColor = "var(--wrong)";
-            tempoEsgotado = true; // Sinaliza que o tempo acabou
+            tempoEsgotado = true;
             
             if (autoEncerra) {
                 finalizarSimulado(true);
@@ -244,7 +238,6 @@ function finalizarSimulado(forcadoPeloTempo = false) {
 
     const percentual = Math.round((acertos / questoes.length) * 100);
     
-    // Gera o painel de resultado na própria página
     const painelResultado = document.createElement('div');
     painelResultado.className = 'card';
     painelResultado.style.textAlign = 'center';
@@ -257,11 +250,9 @@ function finalizarSimulado(forcadoPeloTempo = false) {
     const container = document.getElementById('simulado-area');
     container.insertBefore(painelResultado, container.firstChild);
 
-    // Remove o botão de finalizar
     const btnFinalizar = document.getElementById('btn-finalizar-simulado');
     if (btnFinalizar) btnFinalizar.remove();
 
-    // Rola a página suavemente para o topo para o usuário ver a nota dele
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -275,7 +266,9 @@ let filtrosAtivos = {
 };
 
 function popularFiltros() {
-    // Preenche inicialmente
+    if (!window.bancoDeQuestoes || window.bancoDeQuestoes.length === 0) return;
+
+    // Preenche inicialmente os selects com base nas informações disponíveis no banco
     const especialidades = [...new Set(window.bancoDeQuestoes.map(q => q.especialidade))].sort();
     const provas = [...new Set(window.bancoDeQuestoes.map(q => q.prova))].sort();
     const temas = [...new Set(window.bancoDeQuestoes.map(q => q.tema))].sort();
@@ -283,41 +276,27 @@ function popularFiltros() {
     preencherSelect('filtro-especialidade', especialidades);
     preencherSelect('filtro-prova', provas);
     preencherSelect('filtro-tema', temas);
-
-    // Adiciona escutadores: Quando o usuário escolhe, transforma em Tag
-    document.getElementById('filtro-especialidade').addEventListener('change', (e) => adicionarTag('especialidade', e.target.value));
-    document.getElementById('filtro-tema').addEventListener('change', (e) => adicionarTag('tema', e.target.value));
-    document.getElementById('filtro-prova').addEventListener('change', (e) => adicionarTag('prova', e.target.value));
-    
-    const filtroAno = document.getElementById('filtro-ano');
-    if (filtroAno) {
-        filtroAno.addEventListener('change', (e) => adicionarTag('ano', e.target.value));
-    }
 }
 
 function adicionarTag(tipo, valor) {
-    if (valor === "") return; // Ignora se clicar em "Todos"
+    if (valor === "") return; 
 
-    // Se ainda não estiver na lista, adiciona
     if (!filtrosAtivos[tipo].includes(valor)) {
         filtrosAtivos[tipo].push(valor);
         renderizarTags();
         
-        // Regras de Cascata
         if (tipo === 'especialidade') atualizarFiltroTema();
         if (tipo === 'prova') atualizarFiltroAno();
     }
     
-    // Devolve o menu para a opção "Todos", liberando para o usuário escolher outro!
-    document.getElementById(`filtro-${tipo}`).value = "";
+    const select = document.getElementById(`filtro-${tipo}`);
+    if(select) select.value = "";
 }
 
 function removerTag(tipo, valor) {
-    // Remove da memória
     filtrosAtivos[tipo] = filtrosAtivos[tipo].filter(v => v !== valor);
     renderizarTags();
     
-    // Atualiza a cascata caso um filtro "pai" seja removido
     if (tipo === 'especialidade') atualizarFiltroTema();
     if (tipo === 'prova') atualizarFiltroAno();
 }
@@ -329,7 +308,6 @@ function renderizarTags() {
     container.innerHTML = '';
     const nomesTipos = { especialidade: 'Especialidade', tema: 'Tema', prova: 'Prova', ano: 'Ano' };
 
-    // Cria visualmente a "Pílula" para cada filtro ativo
     Object.keys(filtrosAtivos).forEach(tipo => {
         filtrosAtivos[tipo].forEach(valor => {
             const tag = document.createElement('div');
@@ -340,31 +318,26 @@ function renderizarTags() {
     });
 }
 
-// Cascata: Especialidade -> Tema
 function atualizarFiltroTema() {
     let temasFiltrados;
     if (filtrosAtivos.especialidade.length === 0) {
-        // Sem especialidade? Mostra todos os temas
         temasFiltrados = [...new Set(window.bancoDeQuestoes.map(q => q.tema))].sort();
     } else {
-        // Com especialidade? Mostra apenas temas DAQUELAS especialidades
         const questoesDaEsp = window.bancoDeQuestoes.filter(q => filtrosAtivos.especialidade.includes(q.especialidade));
         temasFiltrados = [...new Set(questoesDaEsp.map(q => q.tema))].sort();
     }
     preencherSelect('filtro-tema', temasFiltrados);
 }
 
-// Cascata: Prova -> Ano
 function atualizarFiltroAno() {
     const containerAno = document.getElementById('container-ano');
+    if (!containerAno) return;
 
     if (filtrosAtivos.prova.length === 0) {
-        // Se removeu todas as provas, Oculta o Ano e apaga da memória
         containerAno.style.display = 'none';
         filtrosAtivos.ano = []; 
         renderizarTags(); 
     } else {
-        // Se escolheu prova, mostra a caixa de Ano focada nela
         containerAno.style.display = 'block';
         const questoesDaProva = window.bancoDeQuestoes.filter(q => filtrosAtivos.prova.includes(q.prova));
         const anosFiltrados = [...new Set(questoesDaProva.map(q => q.ano))].sort();
@@ -376,7 +349,6 @@ function preencherSelect(id, arrayOpcoes) {
     const select = document.getElementById(id);
     if (!select) return;
 
-    // Limpa opções antigas, deixando só o "Todos"
     while (select.options.length > 1) {
         select.remove(1);
     }
@@ -392,7 +364,6 @@ function preencherSelect(id, arrayOpcoes) {
 }
 
 function pesquisarBanco() {
-    // Pega o estado atual da caixinha de favoritos
     const checkboxFav = document.getElementById('filtro-somente-fav');
     const apenasFav = checkboxFav ? checkboxFav.checked : false;
 
@@ -402,13 +373,14 @@ function pesquisarBanco() {
         const bateProva = filtrosAtivos.prova.length === 0 || filtrosAtivos.prova.includes(q.prova);
         const bateAno = filtrosAtivos.ano.length === 0 || filtrosAtivos.ano.includes(q.ano);
         
-        // Se a caixinha estiver marcada, só passa se o ID da questão estiver nos favoritos
         const bateFav = !apenasFav || favoritos.includes(q.id);
         
         return bateEsp && bateTema && bateProva && bateAno && bateFav;
     });
 
     const container = document.getElementById('resultados-banco');
+    if(!container) return; 
+
     container.innerHTML = `<p style="margin-bottom:15px; font-weight:bold; color: var(--primary);">Foram encontradas ${filtradas.length} questões.</p>`;
     
     filtradas.forEach(q => {
@@ -418,12 +390,10 @@ function pesquisarBanco() {
 
 // ---- LÓGICA DO RESUMO DINÂMICO ----
 
-// Puxa as questões específicas para o final do resumo
 function carregarQuestoesPorTema(tema, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    // Procura no banco questões que batam com o tema do resumo
     const questoesDoTema = window.bancoDeQuestoes.filter(q => q.tema.toUpperCase() === tema.toUpperCase());
     
     if (questoesDoTema.length === 0) {
@@ -435,18 +405,8 @@ function carregarQuestoesPorTema(tema, containerId) {
         container.innerHTML += gerarHTMLQuestao(q, false);
     });
 }
-// ---- NOVAS FUNCIONALIDADES (Favoritos, Copiar, Estatísticas, Dark Mode) ----
 
-function toggleTheme() {
-    const body = document.body;
-    if (body.getAttribute('data-theme') === 'dark') {
-        body.removeAttribute('data-theme');
-        localStorage.setItem('ati_theme', 'light');
-    } else {
-        body.setAttribute('data-theme', 'dark');
-        localStorage.setItem('ati_theme', 'dark');
-    }
-}
+// ---- NOVAS FUNCIONALIDADES (Favoritos, Estatísticas) ----
 
 function toggleFavorito(id, btnElement) {
     if (favoritos.includes(id)) {
@@ -467,7 +427,6 @@ function salvarEstatistica(especialidade, acertou) {
     if (acertou) estatisticas[especialidade].acertos += 1;
     
     localStorage.setItem('ati_estatisticas', JSON.stringify(estatisticas));
-    // Atualiza na home se estiver na página inicial
     if (document.getElementById('painel-estatisticas')) renderizarEstatisticas();
 }
 
@@ -496,10 +455,11 @@ function renderizarEstatisticas() {
     html += '</div>';
     painel.innerHTML = html;
 }
-// ---- LÓGICA DO MODO ESCURO (DARK MODE) ----
 
-// Executa assim que a página carrega para aplicar o tema salvo
+// ---- LÓGICA DO MODO ESCURO (DARK MODE) E INICIALIZAÇÃO DA PÁGINA ----
+
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Inicializa Dark Mode
     const temaSalvo = localStorage.getItem('ati_theme');
     if (temaSalvo === 'dark') {
         document.body.setAttribute('data-theme', 'dark');
@@ -507,9 +467,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkbox) checkbox.checked = true;
         atualizarTextoBotaoTema(true);
     }
+
+    // 2. IMPORTANTE: Inicializa os filtros assim que a página de banco carregar!
+    if (document.getElementById('filtro-especialidade')) {
+        popularFiltros();
+    }
 });
 
-// Alterna o tema e salva a preferência
 function toggleTheme() {
     const body = document.body;
     const isDark = body.getAttribute('data-theme') === 'dark';
@@ -525,40 +489,31 @@ function toggleTheme() {
     }
 }
 
-// Muda o texto do botão arredondado
 function atualizarTextoBotaoTema(isDark) {
     const textoBotao = document.getElementById('texto-botao-tema');
     if (textoBotao) {
         textoBotao.innerHTML = isDark ? '☀️ Modo Claro' : '🌙 Modo Escuro';
     }
 }
+
 // ---- LIMPAR MEMÓRIA LOCAL ----
 function limparMemoria() {
     const confirmacao = confirm("Tem a certeza que deseja apagar todo o seu Caderno de Erros e Estatísticas? Esta ação não pode ser desfeita.");
     
     if (confirmacao) {
-        // Limpa todas as chaves salvas no navegador
         localStorage.removeItem('ati_favoritos');
         localStorage.removeItem('ati_estatisticas');
-        
-        // Opcional: se quiser que o Dark Mode também resete, descomente a linha abaixo:
-        // localStorage.removeItem('ati_theme');
-
-        // Reseta as variáveis globais
         favoritos = [];
         estatisticas = {};
-
         alert("Memória limpa com sucesso! Os seus dados foram apagados.");
-        
-        // Recarrega a página para atualizar todo o visual
         window.location.reload();
     }
 }
+
 // ---- LÓGICA DA SANFONA DOS RESUMOS ----
 function toggleResumos(headerElement) {
     const cardClicado = headerElement.closest('.specialty-card');
     
-    // Opcional: Fecha todos os outros cards que estiverem abertos
     const todosCards = document.querySelectorAll('.specialty-card');
     todosCards.forEach(card => {
         if (card !== cardClicado) {
@@ -566,6 +521,5 @@ function toggleResumos(headerElement) {
         }
     });
 
-    // Abre ou fecha o card que o usuário clicou
     cardClicado.classList.toggle('open');
 }
